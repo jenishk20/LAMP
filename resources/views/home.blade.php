@@ -24,7 +24,8 @@
             <div class="card">
                 <div class="card-header">{{('BOOK TICKET NOW')}}</div>
                 <div class="card-body">
-                    <form>
+                    <form method="get" action="/home/search">
+                        @csrf
                         <div class="form-group row">
                             <label for="from" class="col-4 col-form-label">From</label>
                             <div class="col-8">

@@ -12,8 +12,15 @@ class Trip extends Model
     {
         return $this->hasOne(Train::class);
     }
-    public function station()
+    public function fetchSource()
     {
-        return $this->hasOne(Station::class);
+        return $this->hasOne(Station::class,'id','source_station_id');
     }
+    public function fetchDestination()
+    {
+        return $this->hasOne(Station::class,'id','destination_station_id');
+    }
+
+
+
 }

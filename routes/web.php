@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home',[TrainController::class,'show']);
+//Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home/search',[TrainController::class,'index'])->name('index');
+Route::get('/home/search',[TrainController::class,'index']);
+
