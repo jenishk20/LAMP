@@ -10,7 +10,7 @@ class Trip extends Model
     use HasFactory;
     public function train()
     {
-        return $this->hasOne(Train::class);
+        return $this->hasOne(Train::class,'id','train_id');
     }
     public function fetchSource()
     {

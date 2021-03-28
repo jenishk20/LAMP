@@ -26,3 +26,5 @@ Route::get('/home',[TrainController::class,'show']);
 
 Route::get('/home/search',[TrainController::class,'index']);
 
+Route::get('/home/search/book',[TrainController::class,'edit']);
+
