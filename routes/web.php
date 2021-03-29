@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrainController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,16 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
 Auth::routes();
 
+//Admin Route
+Route::get('/home/admin',[App\Http\Controllers\AdminController::class,'index']);
+
 Route::get('/home',[TrainController::class,'show']);
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/home/search',[TrainController::class,'index']);
 
-Route::get('/home/search/book',[TrainController::class,'edit']);
+Route::get('/home/search/book/{i}',[TrainController::class,'edit']);
 
+Route::get('/book/confirmation',[TrainController::class,'update']);

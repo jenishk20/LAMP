@@ -17,12 +17,19 @@ class TrainController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
     public function index(Request $request)
     {
 
         $from_id = $request->input('from');
         $to_id = $request->input('to');
         $doj = $request->input('date');
+
+
+        $request->session()->put('from', $from_id);
+        $request->session()->put('to', $to_id);
+        $request->session()->put('doj', $doj);
+
 
         $train = Train::query()->select('train_name', 'total_seats')->get();
 
@@ -80,7 +87,8 @@ class TrainController extends Controller
 
             foreach ($results as $trip) {
 
-                $sql = Booking::query()->select()->where('id', '=', $trip->id)->where('date', '=', $doj)->get();
+                $sql = Booking::query()->select()->where('trip_id', '=', $trip->id)->where('date', '=', $doj)->get();
+
                 if ($sql->isEmpty()) {
                     $booking = new Booking();
                     $booking->trip_id = $trip->id;
@@ -101,7 +109,7 @@ class TrainController extends Controller
         }
 
 //        dd($avail);
-
+        $request->session()->put('result', $result);
         return view('showTrains', compact('result', 'avail', 'from_id', 'to_id'));
         //return view('train', compact('train', 'trip', 'station'));
     }
@@ -152,16 +160,27 @@ class TrainController extends Controller
      * @param \App\Models\Train $train
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Train $train)
+    public function edit(Request $request, $id)
     {
 
-//        $from_id = $request->input('from');
-//        $to_id = $request->input('to');
-//        $doj=$request->input('date');
-//        dd($from_id,$to_id,$doj);
-//        $from_station=Station::query()->select('station_name')->where('id','=',$from_id)->get();
-//        dd($from_station);
-        return view('tickets.passenger');
+        $request->session()->put('result_idx', $id);
+        $train_id = session()->get('result')[$id][0]->train_id;
+        $trip = session()->get('result')[$id];
+//        dd($trip);
+        $trip_cost = 0;
+        foreach ($trip as $journey) {
+            $trip_cost += ($journey->trip_cost);
+
+        }
+
+        $frm = session()->get('from');
+        $to = session()->get('to');
+        $train_name = Train::query()->select('train_name')->where('id', '=', $train_id)->get()[0]->train_name;
+
+        $frms = Station::query()->select('station_name')->where('id', '=', $frm)->get();
+        $trms = Station::query()->select('station_name')->where('id', '=', $to)->get();
+
+        return view('tickets.passenger', compact('frms', 'trms', 'train_name', 'trip_cost'));
     }
 
     /**
@@ -174,6 +193,34 @@ class TrainController extends Controller
     public function update(Request $request, Train $train)
     {
         //
+        $arr = $_GET['name'];
+
+        $count = count($arr);
+        $idx = session()->get('result_idx');
+        $trip = session()->get('result')[$idx];
+        $doj = session()->get('doj');
+
+        foreach ($trip as $journey) {
+
+            $sql = Booking::query()->select()->where('trip_id', '=', $journey->id)->where('date', '=', $doj)->get();
+
+
+            $avail = $sql[0]->trip_availability;
+            if($count<=$avail)
+            {
+                $sql[0]->trip_availability-=$count;
+                $sql[0]->save();
+
+
+
+            }
+
+
+        }
+
+        return view('tickets.confirm');
+
+
     }
 
     /**
