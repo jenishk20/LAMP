@@ -88,7 +88,7 @@ class TrainController extends Controller
             foreach ($results as $trip) {
 
                 $sql = Booking::query()->select()->where('trip_id', '=', $trip->id)->where('date', '=', $doj)->get();
-
+                //dump($sql);
                 if ($sql->isEmpty()) {
                     $booking = new Booking();
                     $booking->trip_id = $trip->id;
@@ -193,32 +193,39 @@ class TrainController extends Controller
     public function update(Request $request, Train $train)
     {
         //
+        $pass=$request->get('age');
+        dd($pass);
         $arr = $_GET['name'];
 
         $count = count($arr);
         $idx = session()->get('result_idx');
         $trip = session()->get('result')[$idx];
         $doj = session()->get('doj');
-
+        $be = true;
         foreach ($trip as $journey) {
 
             $sql = Booking::query()->select()->where('trip_id', '=', $journey->id)->where('date', '=', $doj)->get();
 
 
             $avail = $sql[0]->trip_availability;
-            if($count<=$avail)
-            {
-                $sql[0]->trip_availability-=$count;
+
+
+            if ($count <= $avail) {
+                $sql[0]->trip_availability -= $count;
                 $sql[0]->save();
 
 
-
+            } else {
+                $be = false;
+                break;
             }
 
 
         }
-
-        return view('tickets.confirm');
+        if ($be)
+            return view('tickets.confirm');
+        else
+            return back()->with('error', 'Tickets Not Available Currently, Check Availability in Other Trains');
 
 
     }

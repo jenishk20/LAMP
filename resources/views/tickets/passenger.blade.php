@@ -4,6 +4,10 @@
 
     <div class="container">
         <div class="card">
+            @include('flash-message')
+            @yield('content')
+        </div>
+        <div class="card">
             <div class="card-header">
                 {{('Travel Details')}}
             </div>

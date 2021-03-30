@@ -24,7 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //Admin Route
-Route::get('/home/admin',[App\Http\Controllers\AdminController::class,'index']);
+Route::get('/admin',[App\Http\Controllers\AdminController::class,'index'])->middleware('Admin');
 
 Route::get('/home',[TrainController::class,'show']);
 

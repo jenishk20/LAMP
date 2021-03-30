@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section()
+@section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <input type="text" value="NULL">
+                <input type="text">
             </div>
         </div>
     </div>
