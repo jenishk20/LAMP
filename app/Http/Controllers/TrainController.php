@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Passenger;
+use App\Models\Reservation;
 use App\Models\Station;
 use App\Models\Train;
 use App\Models\Trip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isEmpty;
 
 class TrainController extends Controller
@@ -95,6 +98,8 @@ class TrainController extends Controller
                     $booking->date = $doj;
                     $booking->trip_availability = $trip->train->total_seats;
                     $booking->save();
+
+
                     $avail = min($avail, $booking->trip_availability);
 
 
@@ -103,6 +108,7 @@ class TrainController extends Controller
 
                     $avail = min($avail, $booking->trip_availability);
                 }
+
 
             }
 
@@ -193,11 +199,12 @@ class TrainController extends Controller
     public function update(Request $request, Train $train)
     {
         //
-        $pass=$request->get('age');
-        dd($pass);
-        $arr = $_GET['name'];
+        $age = $request->get('age');
+        $name = $request->get('name');
+        $gender = $request->get('gender');
 
-        $count = count($arr);
+
+        $count = count($age);
         $idx = session()->get('result_idx');
         $trip = session()->get('result')[$idx];
         $doj = session()->get('doj');
@@ -222,9 +229,43 @@ class TrainController extends Controller
 
 
         }
-        if ($be)
-            return view('tickets.confirm');
-        else
+        if ($be) {
+            $user_id = Auth::user()->id;
+
+
+            $idx = session()->get('result_idx');
+            $journey = session()->get('result')[$idx];
+            $arr = [];
+            foreach ($journey as $trip) {
+
+                $sql = Booking::query()->select()->where('trip_id', '=', $trip->id)->where('date', '=', $doj)->get();
+                array_push($arr, $sql[0]->id);
+
+            }
+            $json = json_encode($arr);
+
+            $reservation = new Reservation();
+            $reservation->user_id = $user_id;
+            $reservation->booking_id = $json;
+            $reservation->save();
+
+            $sql = Reservation::query()->select()->where('user_id', '=', $user_id)->where('booking_id', '=', $json)->get();
+
+
+            for ($i = 0; $i < count($age); $i++) {
+                $passenger = new Passenger();
+                $passenger->reservation_id = $sql[0]->id;
+                $passenger->name = $name[$i];
+                $passenger->age=$age[$i];
+                $passenger->gender=$gender[$i];
+                $passenger->save();
+            }
+
+
+//            $passenger=$passenger=
+            return redirect('/home');
+            //return view('tickets.confirm', compact('name', 'age', 'gender'));
+        } else
             return back()->with('error', 'Tickets Not Available Currently, Check Availability in Other Trains');
 
 

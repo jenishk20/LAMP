@@ -79,7 +79,7 @@
                                 </td>
                                 <td>
                                     <label for="gender">Gender</label>
-                                    <select id="gender" name="gender[]">
+                                    <select name="gender[]">
 
                                         <option>Male</option>
                                         <option>Female</option>

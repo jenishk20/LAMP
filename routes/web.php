@@ -24,7 +24,15 @@ Route::get('/', function () {
 Auth::routes();
 
 //Admin Route
-Route::get('/admin',[App\Http\Controllers\AdminController::class,'index'])->middleware('Admin');
+Route::get('/admin',[App\Http\Controllers\AdminController::class,'index']);
+Route::get('/admin/addTrain',[\App\Http\Controllers\AdminController::class,'addTrain']);
+Route::get('/admin/addTrip',[\App\Http\Controllers\AdminController::class,'addTrip']);
+Route::get('/admin/addStation',[\App\Http\Controllers\AdminController::class,'addStation']);
+Route::get('/admin/addTrain/confirm',[\App\Http\Controllers\AdminController::class,'confirmTrain']);
+Route::get('/admin/addStation/confirm',[\App\Http\Controllers\AdminController::class,'confirmStation']);
+Route::get('/admin/addTrip/confirm',[\App\Http\Controllers\AdminController::class,'confirmTrip']);
+
+
 
 Route::get('/home',[TrainController::class,'show']);
 
