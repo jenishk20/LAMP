@@ -36,6 +36,39 @@ class AdminController extends Controller
 
         return view('admin.addTrip',compact('trains','stations'));
     }
+    public function showTrains()
+    {
+        $trains=Train::query()->select()->get();
+        return view('admin.showTrains',compact('trains'));
+    }
+    public function showStations()
+    {
+        $stations=Station::query()->select()->get();
+        return view('admin.showStations',compact('stations'));
+    }
+    public function showTrips()
+    {
+        $trips=Trip::query()->select()->get();
+        $train_name=[];
+        $from_station=[];
+        $to_station=[];
+        foreach ($trips as $trip)
+        {
+            $sql=Train::query()->select()->where('id','=',$trip->train_id)->get();
+
+            $sql1=Station::query()->select()->where('id','=',$trip->source_station_id)->get();
+            $sql2=Station::query()->select()->where('id','=',$trip->destination_station_id)->get();
+
+            array_push($train_name,$sql[0]->train_name);
+            array_push($from_station,$sql1[0]->station_name);
+            array_push($to_station,$sql2[0]->station_name);
+
+        }
+
+
+        return view('admin.showTrips',compact('trips','train_name','from_station','to_station'));
+    }
+
 
     public function confirmTrain(Request $request)
     {

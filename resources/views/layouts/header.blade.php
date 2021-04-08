@@ -11,7 +11,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{url('/admin/addTrain')}}">Add Trains <span
                                 class="sr-only">(current)</span></a>
                     </li>
@@ -20,6 +20,15 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/admin/addTrip')}}">Add Trip</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/showTrains')}}">Show Trains</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/showStations')}}">Show Stations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/showTrips')}}">Show Trips</a>
                     </li>
 
 

@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -21,7 +22,9 @@
 
 
             </div>
+
             <div class="card">
+                {{dd($user)}}
                 <div class="card-header">{{('BOOK TICKET NOW')}}</div>
                 <div class="card-body">
                     <form method="get" action="/home/search">

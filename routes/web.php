@@ -31,8 +31,9 @@ Route::get('/admin/addStation',[\App\Http\Controllers\AdminController::class,'ad
 Route::get('/admin/addTrain/confirm',[\App\Http\Controllers\AdminController::class,'confirmTrain']);
 Route::get('/admin/addStation/confirm',[\App\Http\Controllers\AdminController::class,'confirmStation']);
 Route::get('/admin/addTrip/confirm',[\App\Http\Controllers\AdminController::class,'confirmTrip']);
-
-
+Route::get('/admin/showStations',[\App\Http\Controllers\AdminController::class,'showStations']);
+Route::get('/admin/showTrains',[\App\Http\Controllers\AdminController::class,'showTrains']);
+Route::get('/admin/showTrips',[\App\Http\Controllers\AdminController::class,'showTrips']);
 
 Route::get('/home',[TrainController::class,'show']);
 

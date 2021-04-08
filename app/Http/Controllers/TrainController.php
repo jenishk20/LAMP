@@ -153,10 +153,10 @@ class TrainController extends Controller
     public function show(Request $request, Train $train)
     {
         //
-
+        $user=Auth::user();
         $stations = Station::query()->select('id', 'station_name')->get();
 
-        return view('train', compact('stations'));
+        return view('train', compact('stations','user'));
 
     }
 
