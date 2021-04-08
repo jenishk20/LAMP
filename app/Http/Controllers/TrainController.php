@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\Reservation;
@@ -10,6 +11,7 @@ use App\Models\Train;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isEmpty;
 
 class TrainController extends Controller
@@ -262,7 +264,7 @@ class TrainController extends Controller
             }
 
 
-//            $passenger=$passenger=
+            Mail::send(new ContactMail($request));
             return redirect('/home');
             //return view('tickets.confirm', compact('name', 'age', 'gender'));
         } else

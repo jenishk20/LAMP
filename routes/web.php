@@ -3,6 +3,9 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrainController;
 use App\Http\Middleware\Admin;
+use App\Mail\Contact;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +45,10 @@ Route::get('/home/search',[TrainController::class,'index']);
 Route::get('/home/search/book/{i}',[TrainController::class,'edit']);
 
 Route::get('/book/confirmation',[TrainController::class,'update']);
+
+
+//Send Mail to User
+Route::post('/book/confirmation',function(Request $request){
+    Mail::send(new \App\Mail\ContactMail($request));
+    return view('/home')->with('message','We have received your response, Thank You for your feedback.');
+});
