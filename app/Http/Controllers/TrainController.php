@@ -201,6 +201,7 @@ class TrainController extends Controller
     public function update(Request $request, Train $train)
     {
         //
+
         $age = $request->get('age');
         $name = $request->get('name');
         $gender = $request->get('gender');
@@ -232,6 +233,8 @@ class TrainController extends Controller
 
         }
         if ($be) {
+
+
             $user_id = Auth::user()->id;
 
 
@@ -265,8 +268,9 @@ class TrainController extends Controller
 
 
             Mail::send(new ContactMail($request));
+
             return redirect('/home');
-            //return view('tickets.confirm', compact('name', 'age', 'gender'));
+
         } else
             return back()->with('error', 'Tickets Not Available Currently, Check Availability in Other Trains');
 

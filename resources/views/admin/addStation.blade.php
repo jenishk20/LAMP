@@ -10,7 +10,7 @@
                 {{'Add Station Data'}}
             </div>
             <div class="card-body">
-                <form method="get" action="/admin/addStation/confirm">
+                <form method="post" action="/admin/addStation/confirm">
                     <div class="form-group row">
                         <label for="sname" class="col-4 col-form-label">Station Name</label>
                         <div class="col-8">

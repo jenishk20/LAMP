@@ -12,7 +12,7 @@
                 {{"Add Trip Data"}}
             </div>
             <div class="card-body">
-                <form method="get" action="/admin/addTrip/confirm">
+                <form method="post" action="/admin/addTrip/confirm">
                     <div class="form-group row">
                         <label for="tname" class="col-4 col-form-label">Train Name</label>
                         <div class="col-8">

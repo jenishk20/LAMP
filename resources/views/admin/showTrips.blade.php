@@ -1,6 +1,6 @@
 @extends('layouts.header')
 @section('jk')
-    <div class="container mt-5">
+    <div class="container mt-5 style:bb">
 
         <table class="table table-striped table-dark">
             <thead>

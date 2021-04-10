@@ -53,7 +53,8 @@
                 {{('Passenger Details')}}
             </div>
             <div class="card-body">
-                <form method="get" action="/book/confirmation">
+                <form method="post" action="/book/confirmation">
+                    @csrf
                     <div class="form-group row">
                         <label for="mobile" class="col-4 col-form-label">Mobile Number</label>
                         <div class="col-8">

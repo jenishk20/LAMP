@@ -1,7 +1,8 @@
-<p>This is a system generated mail. Please do not reply to this email ID. If you have a query or need any clarification
-    you may:<br>
-    (1) Call our 24-hour Customer Care or<br>
-    (2) Email Us at {{env('WEBSITE_OWNER_EMAIL')}}</p>
+<p><b>This is a system generated mail. Please do not reply to this email ID. If you have a query or need any
+        clarification
+        you may:<br>
+        (1) Call our 24-hour Customer Care or<br>
+        (2) Email Us at {{env('WEBSITE_OWNER_EMAIL')}}</b></p>
 
 <h1>Ticket Confirmation</h1>
 <br>
@@ -19,56 +20,142 @@
     these i.e SMS or VRM & original ID will be examined by ticket checking staff on stations/trains for verification
     purpose.
 </p>
-
+<br>
 <hr>
+<br>
 
-<div class="card">
-    <div class="card-header">
-        <h2> {{('Travel Details')}}</h2>
-    </div>
-    <div class="card-body">
+<h2> {{('Ticket Details')}}</h2>
+<table width="100%" cellpadding="5">
+    <tbody>
+    <tr>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <b>Train Name</b>
 
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <span>{{$train_name}}</span>
 
-        <div class="form-group row">
-            <label for="train" class="col-4 col-form-label">Train Name</label>
-            <div class="col-8">
-                <div class="input-group">
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <b>Date of Booking</b>
 
-                    <input id="train" name="train" disabled value="{{$train_name}}" type="text"
-                           class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="boarding " class="col-4 col-form-label">Boarding From</label>
-            <div class="col-8">
-                <input id="boarding " name="boarding " disabled value="{{$frms[0]->station_name}}" type="text"
-                       class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="to" class="col-4 col-form-label">To</label>
-            <div class="col-8">
-                <input id="to" name="to" disabled value="{{$trms[0]->station_name}}" type="text"
-                       class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="doj" class="col-4 col-form-label">Date of Journey</label>
-            <div class="col-8">
-                <input id="doj" name="doj" disabled value="{{session()->get('doj')}}" type="text"
-                       class="form-control">
-            </div>
-        </div>
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <span><?php echo date('y-m-d')?></span>
 
-    </div>
-</div>
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <b>Date of Journey</b>
+
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <span>{{$doj}}</span>
+
+        </td>
+    </tr>
+    <tr>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <b>From</b>
+
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <span>{{$frms[0]->station_name}}</span>
+
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <b>To</b>
+
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <span>{{$trms[0]->station_name}}</span>
+
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <b>Reservation Upto</b>
+
+        </td>
+        <td style="border-bottom:1px solid #ccc;font:12px Arial">
+            <span>{{$trms[0]->station_name}}</span>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
 <hr>
-<b>Name:</b>
 <hr>
-<b>Email:</b>
-<hr>
-<b>Message:</b>
-<hr>
-Thank You
+<h2> {{('Passenger Details')}}</h2>
+<table width="100%" cellpadding="5">
+    <tbody>
+    <tr align="left" style="background-color: #f0f3ff">
+        <td style="font-size: 12px">
+            <b>SI No.</b>
+        </td>
+        <td style="font-size: 12px">
+            <b>Name</b>
+        </td>
+        <td style="font-size: 12px">
+            <b>Age</b>
+        </td>
+        <td style="font-size: 12px">
+            <b>Gender</b>
+        </td>
+        <td style="font-size: 12px">
+            <b>Status</b>
+        </td>
+    </tr>
 
+
+    @for($i=0;$i<count($age);$i++)
+        <tr>
+            <td style="border-bottom:1px solid #ccc;font:12px arial">
+                {{$i+1}}
+            </td>
+            <td style="border-bottom:1px solid #ccc;font:12px arial">
+                {{$name[$i]}}
+            </td>
+            <td style="border-bottom:1px solid #ccc;font:12px arial">
+                {{$age[$i]}}
+            </td>
+            <td style="border-bottom:1px solid #ccc;font:12px arial">
+                {{$gender[$i]}}
+            </td>
+            <td style="border-bottom:1px solid #ccc;font:12px arial">
+                {{'CNF'}}
+            </td>
+        </tr>
+    @endfor
+
+    </tbody>
+</table>
+<br>
+<hr>
+<hr>
+<h2> {{('Fare Details')}}</h2>
+<table width="100%" cellpadding="5">
+    <tbody>
+    <tr>
+        <td style="border-bottom:1px solid #ccc;font:12px arial"><b>Ticket Fare :</b></td>
+        <td> {{$tcost}}</td>
+    </tr>
+    <tr>
+        <td style="border-bottom:1px solid #ccc;font:12px arial"><b>Service Charge :</b></td>
+        <td>Rs. 0.00</td>
+    </tr>
+    <tr>
+        <td style="border-bottom:1px solid #ccc;font:12px arial"><b>Total Charges :</b></td>
+        <td>{{'Rs.'}} {{$tcost}}</td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+<br>
+<br>
+<hr>
+<p>
+    E-Ticket can be cancelled online till preparation of charts (which is normally 4 to 6 hours before the scheduled
+    departure of the train from the originating stations. (For trains starting up to 12 noon the chart preparation is
+    usually done on the previous night)) OR 4 hours before the scheduled departure of boarding the train in case of
+    confirmed ticket OR 30 minutes before the scheduled departure of boarding the train in case of RAC/WL whichever is
+    earlier
+</p>

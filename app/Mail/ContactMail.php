@@ -25,16 +25,16 @@ class ContactMail extends Mailable
     public $age = [];
     public $gender = [];
     public $mobile;
-    public $tcost;
+
 
     public function __construct(Request $request)
     {
         //
-        $this->name = $request->get('name');
-        $this->age = $request->get('age');
-        $this->gender = $request->get('gender');
-        $this->mobile = $request->get('mobile');
-        $this->tcost = $request->get('tcost');
+        $this->name = $request->input('name');
+        $this->age = $request->input('age');
+        $this->gender = $request->input('gender');
+        $this->mobile = $request->input('mobile');
+
 
 
 
@@ -47,6 +47,7 @@ class ContactMail extends Mailable
      */
     public function build()
     {
+
         $user = Auth::user();
         $name[]=$this->name;
         $age[]=$this->age;
@@ -56,13 +57,18 @@ class ContactMail extends Mailable
         $train_id = session()->get('result')[$idx][0]->train_id;
         $frm = session()->get('from');
         $to = session()->get('to');
-
+        $doj=session()->get('doj');
         $train_name = Train::query()->select('train_name')->where('id', '=', $train_id)->get()[0]->train_name;
-
+        $tcost=0;
+        foreach($journey as $trip)
+        {
+            $tcost+=$trip->trip_cost;
+        }
+        $tcost=$tcost*count($age);
         $frms = Station::query()->select('station_name')->where('id', '=', $frm)->get();
         $trms = Station::query()->select('station_name')->where('id', '=', $to)->get();
 
         return $this->subject('New Mail')->from(getenv('MAIL_FROM_ADDRESS'))->to($user->email)->
-        view('email.confirmMail',compact('user','name','age','gender','train_name','frms','trms'));
+        view('email.confirmMail',compact('user','doj','tcost','name','age','gender','journey','train_name','frms','trms'));
     }
 }

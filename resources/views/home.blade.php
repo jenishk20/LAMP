@@ -24,7 +24,7 @@
             </div>
 
             <div class="card">
-                {{dd($user)}}
+
                 <div class="card-header">{{('BOOK TICKET NOW')}}</div>
                 <div class="card-body">
                     <form method="get" action="/home/search">
