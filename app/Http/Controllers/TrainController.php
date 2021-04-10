@@ -140,9 +140,45 @@ class TrainController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function myBookings()
     {
-        //
+        $user = Auth::user();
+        $reserve = Reservation::query()->select()->where('user_id', '=', $user->id)->get();
+        $record = [];
+        $bid = [];
+        foreach ($reserve as $pass) {
+            $passengers = Passenger::query()->select()->where('reservation_id', '=', $pass->id)->get();
+
+
+            $bid[] = $pass->booking_id;
+
+            $record[] = $passengers;
+        }
+        $arr = [];
+        for ($i = 0; $i < count($bid); $i++) {
+            $arr[] = json_decode($bid[$i]);
+
+        }
+        $trips=[];
+        for ($i = 0; $i < count($arr); $i++) {
+
+            for ($j = 0; $j < count($arr[$i]); $j++) {
+
+                $k=$arr[$i][$j];
+                $books=Booking::query()->select()->where('id','=',$k)->get();
+
+                foreach ($books as $booking)
+                {
+                    $trips[$i][]=$booking->trip;
+
+                }
+            }
+
+        }
+
+
+
+        return view('tickets.showTickets', compact('record','trips'));
 
     }
 
@@ -155,10 +191,10 @@ class TrainController extends Controller
     public function show(Request $request, Train $train)
     {
         //
-        $user=Auth::user();
+        $user = Auth::user();
         $stations = Station::query()->select('id', 'station_name')->get();
 
-        return view('train', compact('stations','user'));
+        return view('train', compact('stations', 'user'));
 
     }
 
@@ -261,15 +297,15 @@ class TrainController extends Controller
                 $passenger = new Passenger();
                 $passenger->reservation_id = $sql[0]->id;
                 $passenger->name = $name[$i];
-                $passenger->age=$age[$i];
-                $passenger->gender=$gender[$i];
+                $passenger->age = $age[$i];
+                $passenger->gender = $gender[$i];
                 $passenger->save();
             }
 
 
             Mail::send(new ContactMail($request));
 
-            return redirect('/home');
+            return redirect('/home')->with('success', 'Tickets Booked Successfully');
 
         } else
             return back()->with('error', 'Tickets Not Available Currently, Check Availability in Other Trains');

@@ -136,7 +136,7 @@
     <tbody>
     <tr>
         <td style="border-bottom:1px solid #ccc;font:12px arial"><b>Ticket Fare :</b></td>
-        <td> {{$tcost}}</td>
+        <td>{{'Rs.'}}  {{$tcost}}</td>
     </tr>
     <tr>
         <td style="border-bottom:1px solid #ccc;font:12px arial"><b>Service Charge :</b></td>

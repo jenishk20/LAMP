@@ -49,9 +49,9 @@ class ContactMail extends Mailable
     {
 
         $user = Auth::user();
-        $name[]=$this->name;
-        $age[]=$this->age;
-        $gender[]=$this->gender;
+        $name=$this->name;
+        $age=$this->age;
+        $gender=$this->gender;
         $idx = session()->get('result_idx');
         $journey = session()->get('result')[$idx];
         $train_id = session()->get('result')[$idx][0]->train_id;
@@ -64,7 +64,9 @@ class ContactMail extends Mailable
         {
             $tcost+=$trip->trip_cost;
         }
+
         $tcost=$tcost*count($age);
+
         $frms = Station::query()->select('station_name')->where('id', '=', $frm)->get();
         $trms = Station::query()->select('station_name')->where('id', '=', $to)->get();
 

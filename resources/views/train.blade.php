@@ -2,7 +2,11 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container mt-5">
+        <div class="card">
+            @include('flash-message')
+            @yield('content')
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -34,7 +38,7 @@
                             <div class="form-group row">
                                 <label for="doj" class="col-4 col-form-label">Date of Journey</label>
                                 <div class="col-8">
-                                    <input type="date" id="doj" name="date"  min="2021-3-23" max="2021-6-31">
+                                    <input type="date" id="doj" name="date" min="2021-3-23" max="2021-6-31">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -45,8 +49,24 @@
                         </form>
 
                     </div>
+                </div>
             </div>
         </div>
-    </div>
 
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <p><b>
+                                    All passengers travelling to Odisha, from anywhere by train, must have an RT-PCR
+                                    negative test
+                                    report of maximum 72 hours before the start of journey or a 2nd dose vaccination
+                                    certificate.
+                                </b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 @endsection

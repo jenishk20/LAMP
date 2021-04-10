@@ -38,6 +38,9 @@ Route::get('/admin/showStations',[\App\Http\Controllers\AdminController::class,'
 Route::get('/admin/showTrains',[\App\Http\Controllers\AdminController::class,'showTrains']);
 Route::get('/admin/showTrips',[\App\Http\Controllers\AdminController::class,'showTrips']);
 
+
+Route::get('/home/myBookings',[TrainController::class,'myBookings'])->middleware('auth');
+
 Route::get('/home',[TrainController::class,'show'])->middleware('auth');
 
 Route::get('/home/search',[TrainController::class,'index'])->middleware('auth');
