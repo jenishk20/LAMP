@@ -160,8 +160,10 @@ class TrainController extends Controller
 
         }
         $trips=[];
+        $date=[];
         for ($i = 0; $i < count($arr); $i++) {
 
+            $temp=" ";
             for ($j = 0; $j < count($arr[$i]); $j++) {
 
                 $k=$arr[$i][$j];
@@ -169,16 +171,20 @@ class TrainController extends Controller
 
                 foreach ($books as $booking)
                 {
+
                     $trips[$i][]=$booking->trip;
 
+
                 }
+                $temp=$books[0]->date;
             }
+            $date[]=$temp;
 
         }
 
 
 
-        return view('tickets.showTickets', compact('record','trips'));
+        return view('tickets.showTickets', compact('record','trips','date'));
 
     }
 

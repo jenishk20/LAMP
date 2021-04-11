@@ -7,6 +7,7 @@ use App\Mail\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,12 @@ Route::get('/', function () {
 
 
 Auth::routes();
+
+//Google Login
+Route::get('/login/google',[\App\Http\Controllers\Auth\LoginController::class,'redirectToGoogle'])->name('login.google');
+Route::get('/login/google/callback',[\App\Http\Controllers\Auth\LoginController::class,'handleGoogleCallback']);
+
+
 
 //Admin Route
 Route::get('/admin',[App\Http\Controllers\AdminController::class,'index']);

@@ -12,6 +12,14 @@
                         @csrf
 
                         <div class="form-group row">
+                            <div class="col-md-6 offset-md-3">
+                                <a href="{{route('login.google')}}" class="btn btn-danger" >Login with Google</a>
+                            </div>
+                        </div>
+
+                        <p style="text-align: center">OR</p>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
