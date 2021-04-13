@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrainController;
 use App\Http\Middleware\Admin;
@@ -29,7 +30,7 @@ Auth::routes();
 
 //Google Login
 Route::get('/login/google',[\App\Http\Controllers\Auth\LoginController::class,'redirectToGoogle'])->name('login.google');
-Route::get('/login/google/callback',[\App\Http\Controllers\Auth\LoginController::class,'handleGoogleCallback']);
+Route::get('/google/callback',[\App\Http\Controllers\Auth\LoginController::class,'handleGoogleCallback']);
 
 
 
@@ -48,7 +49,7 @@ Route::get('/admin/showTrips',[\App\Http\Controllers\AdminController::class,'sho
 
 Route::get('/home/myBookings',[TrainController::class,'myBookings'])->middleware('auth');
 
-Route::get('/home',[TrainController::class,'show'])->middleware('auth');
+Route::get('/home',[TrainController::class,'show'])->middleware('auth')->name('home');
 
 Route::get('/home/search',[TrainController::class,'index'])->middleware('auth');
 

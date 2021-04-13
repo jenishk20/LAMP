@@ -1,7 +1,7 @@
 @extends('layouts.header')
 @section('jk')
     <div class="container mt-5">
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-hover text-dark" style="font-size:large">
             <thead>
             <tr>
 

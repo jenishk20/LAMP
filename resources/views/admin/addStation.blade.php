@@ -1,13 +1,13 @@
 @extends('layouts.header')
 @section('jk')
-    <div class="container">
+    <div class="container mt-5">
         <div class="card">
             @include('flash-message')
             @yield('content')
         </div>
         <div class="card">
             <div class="card-header">
-                {{'Add Station Data'}}
+                <h4><b>Add Station Data</b></h4>
             </div>
             <div class="card-body">
                 <form method="post" action="/admin/addStation/confirm">

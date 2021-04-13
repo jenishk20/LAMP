@@ -2,7 +2,7 @@
 @section('jk')
     <div class="container mt-5 style:bb">
 
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-hover text-dark" style="font-size: large" >
             <thead>
             <tr>
 

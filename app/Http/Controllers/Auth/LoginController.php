@@ -42,18 +42,20 @@ class LoginController extends Controller
     }
     public function redirectToGoogle()
     {
+
         return Socialite::driver('google')->redirect();
     }
     public  function handleGoogleCallback()
     {
-        $user=Socialite::driver('google')->user();
+
+        $user=Socialite::driver('google')->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))->stateless()->user();
 
         $this->_registerOrLoginUser($user);
-
         return redirect()->route('home');
     }
     protected function _registerOrLoginUser($data)
     {
+
         $user=User::where('email','=',$data->email)->first();
 
         if(!$user)

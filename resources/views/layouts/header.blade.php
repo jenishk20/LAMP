@@ -1,9 +1,21 @@
 @extends('layouts.app')
 @section('content')
 
+    <style>
+        body {
+            background-image: url({{url('images/b8.png')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 700px;
+            position: center;
+
+
+        }
+    </style>
+
     <div class="container">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{url('/admin')}}">Admin</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,8 +46,11 @@
 
                 </ul>
             </div>
+
         </nav>
         @yield('jk')
     </div>
+
+
 
 @endsection
