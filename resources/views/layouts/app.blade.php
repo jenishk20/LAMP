@@ -25,7 +25,7 @@
             background-repeat: no-repeat;
             min-height: 700px;
             position: center;
-            
+
 
         }
     </style>

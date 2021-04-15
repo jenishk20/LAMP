@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TrainController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\AdminMiddleware;
 use App\Mail\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -35,7 +36,7 @@ Route::get('/google/callback',[\App\Http\Controllers\Auth\LoginController::class
 
 
 //Admin Route
-Route::get('/admin',[App\Http\Controllers\AdminController::class,'index']);
+Route::get('/admin',[App\Http\Controllers\AdminController::class,'index'])->middleware(AdminMiddleware::class);
 Route::get('/admin/addTrain',[\App\Http\Controllers\AdminController::class,'addTrain']);
 Route::get('/admin/addTrip',[\App\Http\Controllers\AdminController::class,'addTrip']);
 Route::get('/admin/addStation',[\App\Http\Controllers\AdminController::class,'addStation']);

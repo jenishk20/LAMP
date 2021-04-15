@@ -28,13 +28,12 @@ class TrainController extends Controller
 
         $from_id = $request->input('from');
         $to_id = $request->input('to');
-        $frms = Station::query()->select('station_name')->where('id', '=', $from_id)->get();
-        $trms = Station::query()->select('station_name')->where('id', '=', $to_id)->get();
+        $frms = Station::query()->select()->where('id', '=', $from_id)->get();
+        $trms = Station::query()->select()->where('id', '=', $to_id)->get();
 
-        dd($frms);
+
         $request->session()->put('frms',$frms);
         $request->session()->put('trms',$trms);
-
         $doj = $request->input('date');
 
 
