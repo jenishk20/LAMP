@@ -56,6 +56,8 @@ Route::get('/home/search',[TrainController::class,'index'])->middleware('auth');
 
 Route::get('/home/search/book/{i}',[TrainController::class,'edit'])->middleware('auth');
 
+//Cancel Ticket Route
+Route::get('/home/myBookings/{x}',[TrainController::class,'destroy'])->middleware('auth');
 
 
 Route::post('/book/confirmation',[TrainController::class,'update'])->middleware('auth');

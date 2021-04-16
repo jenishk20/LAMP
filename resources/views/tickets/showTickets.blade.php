@@ -65,8 +65,19 @@
                                             <td>{{('CNF')}}</td>
                                         </tr>
                                     @endfor
+
+
                                     </tbody>
                                 </table>
+
+
+                                @if($date[$i]>date('Y-m-d'))
+{{--                                    {{dd($record[$i])}}--}}
+                                    <form action="/home/myBookings/{{$record[$i][0]->reservation_id}}" method="get">
+                                        @csrf
+                                        <button class="btn btn-danger">Cancel Ticket</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
 
@@ -78,4 +89,5 @@
         </div>
 
     </div>
+
 @endsection

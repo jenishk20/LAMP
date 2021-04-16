@@ -12,6 +12,7 @@ use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 use function PHPUnit\Framework\isEmpty;
 
 class TrainController extends Controller
@@ -32,8 +33,8 @@ class TrainController extends Controller
         $trms = Station::query()->select()->where('id', '=', $to_id)->get();
 
 
-        $request->session()->put('frms',$frms);
-        $request->session()->put('trms',$trms);
+        $request->session()->put('frms', $frms);
+        $request->session()->put('trms', $trms);
         $doj = $request->input('date');
 
 
@@ -165,32 +166,30 @@ class TrainController extends Controller
             $arr[] = json_decode($bid[$i]);
 
         }
-        $trips=[];
-        $date=[];
+        $trips = [];
+        $date = [];
         for ($i = 0; $i < count($arr); $i++) {
 
-            $temp=" ";
+            $temp = " ";
             for ($j = 0; $j < count($arr[$i]); $j++) {
 
-                $k=$arr[$i][$j];
-                $books=Booking::query()->select()->where('id','=',$k)->get();
+                $k = $arr[$i][$j];
+                $books = Booking::query()->select()->where('id', '=', $k)->get();
 
-                foreach ($books as $booking)
-                {
+                foreach ($books as $booking) {
 
-                    $trips[$i][]=$booking->trip;
+                    $trips[$i][] = $booking->trip;
 
 
                 }
-                $temp=$books[0]->date;
+                $temp = $books[0]->date;
             }
-            $date[]=$temp;
+            $date[] = $temp;
 
         }
 
 
-
-        return view('tickets.showTickets', compact('record','trips','date'));
+        return view('tickets.showTickets', compact('record', 'trips', 'date'));
 
     }
 
@@ -235,8 +234,6 @@ class TrainController extends Controller
 
         $frms = Station::query()->select('station_name')->where('id', '=', $frm)->get();
         $trms = Station::query()->select('station_name')->where('id', '=', $to)->get();
-
-
 
 
         return view('tickets.passenger', compact('frms', 'trms', 'train_name', 'trip_cost'));
@@ -334,8 +331,29 @@ class TrainController extends Controller
      * @param \App\Models\Train $train
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Train $train)
+    public function destroy(Request $request, $id)
     {
-        //
+
+
+
+
+        $reserve = Reservation::query()->select()->where('id', '=', $id)->get();
+
+        $arr = json_decode($reserve[0]->booking_id);
+        dump($arr);
+        for($i=0;$i<count($arr);$i++)
+        {
+            $booking=Booking::query()->select()->where('id','=',$arr[$i])->get();
+
+            Passenger::where('reservation_id','=',$id)->delete();
+            Reservation::where('id','=',$id)->delete();
+            $booking[0]->trip_availability++;
+            $booking[0]->save();
+
+        }
+
+        return back()->with('success', 'Cancelled Successfully');
+
+
     }
 }

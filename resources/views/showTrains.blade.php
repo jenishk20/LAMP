@@ -7,7 +7,11 @@
         @csrf
 
         @if(count($result)==0)
-            {{('No Available Trains')}}
+            <div class="card">
+                <div class="card-header">
+                    {{('No Available Trains')}}
+                </div>
+            </div>
         @endif
 
 

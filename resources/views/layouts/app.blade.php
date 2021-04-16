@@ -46,7 +46,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-
+                    <a class="nav-link">HOLIDAYS</a>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link">LOYALTIES</a>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link">CANCEL TICKETS</a>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link">MORE</a>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
