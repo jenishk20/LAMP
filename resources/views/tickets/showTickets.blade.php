@@ -3,7 +3,23 @@
 @section('content')
 
     <div class="container">
+        <div class="card">
+            @include('flash-message')
+            @yield('content')
+        </div>
 
+        @if(count($record)==0)
+            <div class="card">
+                <div class="card-body">
+                    <div style="font-size: 18px">You have no bookings as of now , click below button to book tickets <now></now></div><hr>
+                    <button class="btn btn-light">
+                        <a href="http://127.0.0.1:8000/home">Book Ticket Now</a>
+                    </button>
+                </div>
+
+            </div>
+
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @for($i=0;$i<count($record);$i++)
@@ -72,7 +88,7 @@
 
 
                                 @if($date[$i]>date('Y-m-d'))
-{{--                                    {{dd($record[$i])}}--}}
+                                    {{--                                    {{dd($record[$i])}}--}}
                                     <form action="/home/myBookings/{{$record[$i][0]->reservation_id}}" method="get">
                                         @csrf
                                         <button class="btn btn-danger">Cancel Ticket</button>

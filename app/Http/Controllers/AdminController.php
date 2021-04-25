@@ -72,9 +72,10 @@ class AdminController extends Controller
 
     public function confirmTrain(Request $request)
     {
+
         $train_name=$request->get('tname');
         $seats=$request->get('seats');
-
+      
         $sql=Train::query()->select()->where('train_name','=',$train_name)->get();
 
         if($sql->isEmpty())

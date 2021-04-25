@@ -12,7 +12,9 @@
                 <h4><b>Add Train Data</b></h4>
             </div>
             <div class="card-body">
+
                 <form method="post" action="/admin/addTrain/confirm">
+                    @csrf
                     <div class="form-group row">
                         <label for="tname" class="col-4 col-form-label">Train Name</label>
                         <div class="col-8">

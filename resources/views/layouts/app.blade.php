@@ -46,16 +46,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link">HOLIDAYS</a>
+                    <a class="nav-link" href="/home">BOOK TICKET NOW</a>
                 </ul>
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link">LOYALTIES</a>
+                    <a class="nav-link ml-2">LOYALTIES</a>
                 </ul>
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link">CANCEL TICKETS</a>
-                </ul>
-                <ul class="navbar-nav mr-auto">
-                    <a class="nav-link">MORE</a>
+                    <a class="nav-link" href="http://127.0.0.1:8000/home/myBookings">CANCEL TICKETS</a>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -64,13 +61,13 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('LOGIN') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('REGISTER') }}</a>
                             </li>
                         @endif
                     @else

@@ -13,6 +13,7 @@
             </div>
             <div class="card-body">
                 <form method="post" action="/admin/addTrip/confirm">
+                    @csrf
                     <div class="form-group row">
                         <label for="tname" class="col-4 col-form-label">Train Name</label>
                         <div class="col-8">

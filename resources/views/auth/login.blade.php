@@ -12,12 +12,12 @@
                         @csrf
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-3">
+                            <div class="col-md-6 offset-md-4">
                                 <a href="{{route('login.google')}}" class="btn btn-danger" >Login with Google</a>
                             </div>
                         </div>
 
-                        <p style="text-align: center">OR</p>
+                        <p style="text-align: center" class="mr-5">OR</p>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -64,6 +64,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">

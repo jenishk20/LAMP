@@ -340,7 +340,7 @@ class TrainController extends Controller
         $reserve = Reservation::query()->select()->where('id', '=', $id)->get();
 
         $arr = json_decode($reserve[0]->booking_id);
-        dump($arr);
+
         for($i=0;$i<count($arr);$i++)
         {
             $booking=Booking::query()->select()->where('id','=',$arr[$i])->get();
